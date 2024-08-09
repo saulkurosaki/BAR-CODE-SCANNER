@@ -1,7 +1,37 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const Scanner = () => {
   const [isScanning, setIsScanning] = useState(false);
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (isScanning) {
+      startCamera();
+    } else {
+      stopCamera();
+    }
+  }, [isScanning]);
+
+  const startCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" },
+      });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (error) {
+      console.error("Error al acceder a la cámara:", error);
+    }
+  };
+
+  const stopCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const tracks = videoRef.current.srcObject.getTracks();
+      tracks.forEach((track) => track.stop());
+      videoRef.current.srcObject = null;
+    }
+  };
 
   return (
     <section className="w-full max-w-4xl mx-auto min-h-screen flex flex-col justify-center items-center p-4">
@@ -20,7 +50,13 @@ const Scanner = () => {
 
       <div className="w-full aspect-[4/3] bg-gray-100 border-4 border-blue-500 rounded-xl shadow-xl overflow-hidden flex justify-center items-center">
         {isScanning ? (
-          <div className="text-2xl text-gray-600">Escaneando...</div>
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted
+            className="w-full h-full object-cover transform -scale-x-100"
+          />
         ) : (
           <div className="text-2xl text-gray-600">No hay cámara activa</div>
         )}
