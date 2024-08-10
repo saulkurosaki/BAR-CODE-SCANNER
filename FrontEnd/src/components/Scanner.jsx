@@ -41,21 +41,21 @@ const Scanner = () => {
     }, 3000); // Captura una imagen cada 3 segundos
   };
 
-  // const captureImage = () => {
-  //   if (videoRef.current && canvasRef.current) {
-  //     const canvas = canvasRef.current;
-  //     const video = videoRef.current;
-  //     canvas.width = video.videoWidth;
-  //     canvas.height = video.videoHeight;
-  //     canvas
-  //       .getContext("2d")
-  //       .drawImage(video, 0, 0, canvas.width, canvas.height);
+  const captureImage = () => {
+    if (videoRef.current && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const video = videoRef.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas
+        .getContext("2d")
+        .drawImage(video, 0, 0, canvas.width, canvas.height);
 
-  //     // Enviar la imagen al backend
-  //     const imageDataUrl = canvas.toDataURL("image/jpeg");
-  //     sendImageToBackend(imageDataUrl);
-  //   }
-  // };
+      // Enviar la imagen al backend
+      const imageDataUrl = canvas.toDataURL("image/jpeg");
+      sendImageToBackend(imageDataUrl);
+    }
+  };
 
   // const sendImageToBackend = (imageDataUrl) => {
   //   // Lógica para enviar la imagen al backend
