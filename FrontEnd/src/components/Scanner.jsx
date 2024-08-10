@@ -35,11 +35,11 @@ const Scanner = () => {
     }
   };
 
-  // const startCapturing = () => {
-  //   setInterval(() => {
-  //     captureImage();
-  //   }, 3000); // Captura una imagen cada 3 segundos
-  // };
+  const startCapturing = () => {
+    setInterval(() => {
+      captureImage();
+    }, 3000); // Captura una imagen cada 3 segundos
+  };
 
   // const captureImage = () => {
   //   if (videoRef.current && canvasRef.current) {
