@@ -57,10 +57,10 @@ const Scanner = () => {
     }
   };
 
-  // const sendImageToBackend = (imageDataUrl) => {
-  //   // Lógica para enviar la imagen al backend
-  //   console.log("Enviando imagen al backend:", imageDataUrl);
-  // };
+  const sendImageToBackend = (imageDataUrl) => {
+    // Lógica para enviar la imagen al backend
+    console.log("Enviando imagen al backend:", imageDataUrl);
+  };
 
   return (
     <section className="w-full max-w-4xl mx-auto min-h-screen flex flex-col justify-center items-center p-4">
