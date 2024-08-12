@@ -1,5 +1,6 @@
 import Scanner from "./components/Scanner";
 import logo from "./assets/transparent-logo.svg";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         <img src={logo} alt="Logo" className="w-44 h-44" />
       </div>
       <Scanner />
+      <Sidebar />
     </main>
   );
 }
