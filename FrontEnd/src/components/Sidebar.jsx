@@ -48,16 +48,27 @@ const cartItems = [
 ];
 
 const Sidebar = () => {
+  const itemCount = cartItems.length; // Contar los elementos en cartItems
+
   return (
     <section className="absolute top-10 right-12">
       <Sheet>
         <SheetTrigger>
-          <img
-            src={shoppingCartIcon}
-            alt="shopping-cart"
-            width={37}
-            className="invert"
-          />
+          <div className="relative">
+            {" "}
+            {/* Contenedor relativo para la burbuja */}
+            <img
+              src={shoppingCartIcon}
+              alt="shopping-cart"
+              width={37}
+              className="invert"
+            />
+            {itemCount > 0 && ( // Mostrar burbuja solo si hay elementos
+              <span className="absolute top-0 left-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {itemCount}
+              </span>
+            )}
+          </div>
         </SheetTrigger>
         <SheetContent className="min-w-[500px] bg-gradient-to-br from-[#30cfd0] to-[#330867] border-none">
           <SheetHeader>

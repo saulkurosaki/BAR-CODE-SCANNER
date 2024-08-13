@@ -84,7 +84,7 @@ const Scanner = () => {
             autoPlay
             playsInline
             muted
-            className="w-full h-full object-cover transform -scale-x-100"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="text-2xl text-gray-600">No hay cámara activa</div>
