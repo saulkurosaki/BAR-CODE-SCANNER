@@ -7,14 +7,11 @@ const ScannedItem = ({ item, index }) => {
       <span className="ml-4 text-[#ddd] text-xl gradient-text">
         {index + 1}
       </span>
-      <span className="ml-4 text-[16px] font-bold text-[#ddd]">
-        {item.name}
+      <span className="ml-7 text-[16px] font-bold text-[#ddd]">
+        ${item.price}
       </span>
-      <span
-        className="ml-4 text-[#ddd] overflow-hidden text-ellipsis whitespace-nowrap"
-        style={{ maxWidth: "60%" }}
-      >
-        {item.description}
+      <span className="text-[16px] font-bold text-[#ddd] flex-1 text-center">
+        {item.name}
       </span>
     </div>
   );
