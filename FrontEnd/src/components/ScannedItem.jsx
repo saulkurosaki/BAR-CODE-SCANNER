@@ -4,7 +4,7 @@ const ScannedItem = ({ item, index }) => {
   return (
     <div
       key={item.id}
-      className="flex items-center h-16 rounded-lg border-2 border-[#2AC8CA] justify-between"
+      className="flex items-center min-h-16 rounded-lg border-2 border-[#2AC8CA] justify-between"
     >
       <span className="ml-4 text-[#ddd] text-xl gradient-text">
         {index + 1}
