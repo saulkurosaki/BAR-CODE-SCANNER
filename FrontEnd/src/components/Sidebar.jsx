@@ -125,7 +125,7 @@ const Sidebar = () => {
               Shopping Cart
             </SheetTitle>
             <SheetDescription>
-              <div className="flex flex-col space-y-4 overflow-y-auto max-h-[83vh]">
+              <div className="flex flex-col space-y-5 overflow-y-auto max-h-[85vh]">
                 {cartItems.map((item, index) => (
                   <ScannedItem item={item} index={index} />
                 ))}
