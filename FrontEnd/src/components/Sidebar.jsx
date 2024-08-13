@@ -15,36 +15,42 @@ const cartItems = [
     name: "Galletas Oreo",
     description:
       "Galletas de chocolate rellenas de una deliciosa crema blanca por dentro que te dejara con ganas de comer mas.",
+    price: 2.99,
   },
   {
     id: crypto.randomUUID(),
     name: "Café con Leche",
     description:
       "Un delicioso café mezclado con leche fresca, perfecto para empezar el día.",
+    price: 1.49,
   },
   {
     id: crypto.randomUUID(),
     name: "Tortilla de Patatas",
     description:
       "Una tortilla de patatas casera, hecha con amor y dedicación, para disfrutar en cualquier momento.",
+    price: 3.99,
   },
   {
     id: crypto.randomUUID(),
     name: "Pizza Margherita",
     description:
       "Una pizza clásica italiana, con salsa de tomate, mozzarella fresca y albahaca, perfecta para una noche de cine.",
+    price: 12.99,
   },
   {
     id: crypto.randomUUID(),
     name: "Hamburguesa Clásica",
     description:
       "Una hamburguesa clásica, con carne de ternera, lechuga, tomate, cebolla y queso, para disfrutar en un día de verano.",
+    price: 8.99,
   },
   {
     id: crypto.randomUUID(),
     name: "Ensalada de Frutas",
     description:
       "Una fresca ensalada de frutas, con una variedad de colores y sabores, perfecta para una comida ligera.",
+    price: 4.99,
   },
 ];
 
