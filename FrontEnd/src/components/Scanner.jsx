@@ -92,10 +92,6 @@ const Scanner = () => {
       </div>
 
       <canvas ref={canvasRef} style={{ display: "none" }} />
-
-      <div className="w-full mt-8 text-center text-lg text-gray-600">
-        Coloca el código QR dentro del área de escaneo
-      </div>
     </section>
   );
 };
