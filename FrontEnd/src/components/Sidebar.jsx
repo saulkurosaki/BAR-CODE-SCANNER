@@ -52,6 +52,48 @@ const cartItems = [
       "Una fresca ensalada de frutas, con una variedad de colores y sabores, perfecta para una comida ligera.",
     price: 4.99,
   },
+  {
+    id: crypto.randomUUID(),
+    name: "Tacos de Carnitas",
+    description:
+      "Tacos de carnitas, con carne de cerdo cocida a la perfección, salsa de limón y cebolla, para disfrutar en un día festivo.",
+    price: 9.99,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Sushi de Atún",
+    description:
+      "Sushi de atún fresco, con arroz japonés y wasabi, perfecto para una comida exótica.",
+    price: 15.99,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Tortas de Aceite",
+    description:
+      "Tortas de aceite, hechas con aceite de oliva y azúcar, perfectas para un desayuno o merienda.",
+    price: 1.99,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Pollo al Curry",
+    description:
+      "Pollo al curry, cocido en una deliciosa salsa de curry, con arroz basmati y verduras, para disfrutar en un día de invierno.",
+    price: 10.99,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Ensalada de Espinacas",
+    description:
+      "Ensalada de espinacas frescas, con aguacate, huevo duro y vinagreta de limón, perfecta para una comida saludable.",
+    price: 5.99,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Tostada de Aguacate",
+    description:
+      "Tostada de aguacate, con aguacate fresco, sal y limón, perfecta para un snack saludable.",
+    price: 3.49,
+  },
 ];
 
 const Sidebar = () => {
@@ -83,7 +125,7 @@ const Sidebar = () => {
               Shopping Cart
             </SheetTitle>
             <SheetDescription>
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-5 overflow-y-auto max-h-[85vh]">
                 {cartItems.map((item, index) => (
                   <ScannedItem item={item} index={index} />
                 ))}
