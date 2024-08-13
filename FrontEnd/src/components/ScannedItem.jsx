@@ -13,7 +13,7 @@ const ScannedItem = ({ item, index }) => {
       key={item.id}
       className={`flex flex-col items-center rounded-lg border-2 border-[#2AC8CA] justify-between ${
         isArrowUp ? "h-auto" : "min-h-16"
-      } transition-height duration-500`}
+      } transition-min-height duration-700 ease-in-out`}
     >
       <div className="flex items-center mt-4 mb-3 justify-between w-full">
         <span className="ml-4 text-[#ddd] text-xl gradient-text">
@@ -39,7 +39,7 @@ const ScannedItem = ({ item, index }) => {
       </div>
       {isArrowUp && (
         <div className="p-4">
-          <p className="text-[#ddd] text-lg">{item.description}</p>
+          <p className="text-[#ddd] text-lg line-clamp-3">{item.description}</p>
         </div>
       )}
     </div>
