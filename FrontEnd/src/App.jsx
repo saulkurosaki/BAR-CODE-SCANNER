@@ -1,6 +1,6 @@
 import Scanner from "./components/Scanner";
-import logo from "./assets/transparent-logo.svg";
 import Sidebar from "./components/Sidebar";
+import logo from "./assets/scann-x-transparent-logo.svg";
 
 function App() {
   return (

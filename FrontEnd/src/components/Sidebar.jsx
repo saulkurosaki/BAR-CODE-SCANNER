@@ -109,7 +109,7 @@ const Sidebar = () => {
             <img
               src={shoppingCartIcon}
               alt="shopping-cart"
-              width={37}
+              width={40}
               className="invert"
             />
             {itemCount > 0 && ( // Mostrar burbuja solo si hay elementos
@@ -121,7 +121,7 @@ const Sidebar = () => {
         </SheetTrigger>
         <SheetContent className="min-w-[500px] bg-gradient-to-br from-[#30cfd0] to-[#330867] border-none">
           <SheetHeader>
-            <SheetTitle className="text-[28px] text-[#ddd] mb-7 mt-1">
+            <SheetTitle className="text-[33px] text-[#ddd] mb-7 mt-1">
               Shopping Cart
             </SheetTitle>
             <SheetDescription>
