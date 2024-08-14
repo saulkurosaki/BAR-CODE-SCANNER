@@ -5,12 +5,31 @@ const Scanner = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
+  const [scanningText, setScanningText] = useState("Scanning"); // Estado para el texto de escaneo
+  const [dotCount, setDotCount] = useState(0); // Contador de puntos
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDotCount((prev) => (prev + 1) % 4); // Cambia el contador de puntos
+    }, 300); // Cada medio segundo
+
+    return () => clearInterval(interval); // Limpiar el intervalo al desmontar
+  }, []);
+
+  useEffect(() => {
+    setScanningText("Scanning" + ".".repeat(dotCount)); // Actualiza el texto de escaneo
+  }, [dotCount]);
+
   useEffect(() => {
     if (isScanning) {
       startCamera();
     } else {
       stopCamera();
     }
+
+    return () => {
+      stopCamera(); // Limpiar al desmontar
+    };
   }, [isScanning]);
 
   const startCamera = async () => {
@@ -36,9 +55,13 @@ const Scanner = () => {
   };
 
   const startCapturing = () => {
-    setInterval(() => {
+    const capture = () => {
       captureImage();
-    }, 3000); // Captura una imagen cada 3 segundos
+      if (isScanning) {
+        setTimeout(capture, 3000); // Captura una imagen cada 3 segundos
+      }
+    };
+    capture();
   };
 
   const captureImage = () => {
@@ -59,7 +82,7 @@ const Scanner = () => {
 
   const sendImageToBackend = (imageDataUrl) => {
     // Lógica para enviar la imagen al backend
-    console.log("Enviando imagen al backend:", imageDataUrl);
+    console.log("Enviando imagen al backend");
   };
 
   return (
@@ -69,11 +92,11 @@ const Scanner = () => {
           onClick={() => setIsScanning(!isScanning)}
           className={`px-8 py-4 rounded-lg text-xl font-semibold transition-colors ${
             isScanning
-              ? "bg-red-600 hover:bg-red-700 text-white"
-              : "bg-blue-500 hover:bg-blue-600 text-white"
+              ? "bg-gradient-to-br from-[#685bfe] to-[#ff61a1] text-white"
+              : "bg-gradient-to-br from-[#ff61a1] to-[#685bfe] text-white"
           }`}
         >
-          {isScanning ? "Detener escaneo" : "Iniciar escaneo"}
+          {isScanning ? scanningText : "Start scanning"}
         </button>
       </div>
 
@@ -87,7 +110,16 @@ const Scanner = () => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="text-2xl text-gray-600">No hay cámara activa</div>
+          <div className="bg-[#436b9d] text-white text-center h-full w-full">
+            <div className="flex items-center flex-col p-8 gap-28 w-full h-full">
+              <p className="text-[80px] mt-24">
+                Welcome to <span className="gradient-text">Scann-X</span>
+              </p>
+              <p className="text-5xl">
+                Click on the button above to start scanning your products!
+              </p>
+            </div>
+          </div>
         )}
       </div>
 
