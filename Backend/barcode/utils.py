@@ -13,7 +13,7 @@ def decodeImage(codigo):
         if image is None:
             raise ValueError("La imagen no se pudo decodificar.")
 
-        # Decodificar los códigos de barras
+        # Decodificar los codigos de barras
         barcodes = pyzbar.decode(image)
         barcode_data_list = []
 
@@ -23,7 +23,7 @@ def decodeImage(codigo):
             barcodeData = barcode.data.decode("utf-8")
             barcode_data_list.append(barcodeData)
 
-        # Retornar la lista de datos de códigos de barras encontrados
+        # Retornar la lista de datos de codigos de barras encontrados
         return barcode_data_list
 
     except Exception as e:
@@ -31,7 +31,7 @@ def decodeImage(codigo):
         return []
     
 
-    
+
 
     
 

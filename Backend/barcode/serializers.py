@@ -6,7 +6,8 @@ class imageSerializer(serializers.Serializer):
     codigobase64 = serializers.CharField() #campo para recibir el codigo de la imagen 
 
 
-    
+class codeSerializer(serializers.Serializer):
+    codigobase64 = serializers.CharField()
 
 class productSerializer(serializers.ModelSerializer):
     class Meta:
