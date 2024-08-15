@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import imageSerializer, productSerializer
+from .serializers import imageSerializer, productSerializer , codeSerializer
 from .utils import decodeImage
 from .models import products
 
@@ -32,7 +32,7 @@ class ProductFromImageView(APIView):
             product_serializer = productSerializer(product)
             
             if created:
-                message = 'Producto creado con éxito.'
+                message = 'Producto creado con exito.'
             else:
                 message = 'Producto encontrado.'
 
@@ -41,4 +41,35 @@ class ProductFromImageView(APIView):
                 'product': product_serializer.data
             }, status=status.HTTP_200_OK)
 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+#endpoint para consultar el producto o crearlo digitando el codigo manualmente
+class digitCode(APIView):
+    def post(self, request):
+        serializer = codeSerializer(data=request.data)
+        if serializer.is_valid():
+            codigobase64 = serializer.validated_data['codigobase64']
+
+            barcode_data = codigobase64
+
+            product, created = products.objects.get_or_create(
+                codigo_barras=barcode_data,
+                defaults={'name': 'unknown', 'descripcion': '', 'precio': 0}
+            )
+
+            # Serializar el producto
+            serialized_product = productSerializer(product)
+
+            if created:
+                message = 'Producto creado con éxito'
+            else:
+                message = 'Producto encontrado'
+
+            return Response({
+                'message': message,
+                'product': serialized_product.data  # Accede a los datos serializados
+            }, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
