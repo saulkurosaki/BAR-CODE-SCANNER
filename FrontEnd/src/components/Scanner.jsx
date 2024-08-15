@@ -80,9 +80,25 @@ const Scanner = () => {
     }
   };
 
-  const sendImageToBackend = (imageDataUrl) => {
-    // Lógica para enviar la imagen al backend
-    console.log("Enviando imagen al backend");
+  const sendImageToBackend = async (imageDataUrl) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/scanProduct/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ codigobase64: imageDataUrl }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en la respuesta del servidor");
+      }
+
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
+    } catch (error) {
+      console.error("Error al enviar la imagen al backend:", error);
+    }
   };
 
   return (
