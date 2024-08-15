@@ -21,7 +21,7 @@ const ScannedItem = ({ item, index }) => {
           {index + 1}
         </span>
         <span className="ml-7 text-[17px] font-bold text-[#ddd]">
-          ${item.price}
+          ${item.precio}
         </span>
         <span className="text-[16px] font-bold text-[#ddd] flex-1 text-center">
           {item.name}
@@ -39,7 +39,7 @@ const ScannedItem = ({ item, index }) => {
       </div>
       {isArrowUp && (
         <div className="p-4">
-          <p className="text-[#ddd] text-lg line-clamp-3">{item.description}</p>
+          <p className="text-[#ddd] text-lg line-clamp-3">{item.descripcion}</p>
         </div>
       )}
     </div>

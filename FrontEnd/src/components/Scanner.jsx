@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useScannedItems } from "../context/ScannedItemsContext.jsx";
 
 const Scanner = () => {
   const [isScanning, setIsScanning] = useState(false);
@@ -7,6 +8,7 @@ const Scanner = () => {
 
   const [scanningText, setScanningText] = useState("Scanning"); // Estado para el texto de escaneo
   const [dotCount, setDotCount] = useState(0); // Contador de puntos
+  const { setScannedItems } = useScannedItems(); // Obtén la función para actualizar el estado
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -96,6 +98,11 @@ const Scanner = () => {
 
       const data = await response.json();
       console.log("Respuesta del servidor:", data);
+
+      // Agregar el producto al estado si el mensaje es "Producto encontrado."
+      if (data.message === "Producto encontrado.") {
+        setScannedItems((prevItems) => [...prevItems, data.product]);
+      }
     } catch (error) {
       console.error("Error al enviar la imagen al backend:", error);
     }
