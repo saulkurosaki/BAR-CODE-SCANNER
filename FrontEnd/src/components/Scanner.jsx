@@ -158,7 +158,7 @@ const Scanner = () => {
         </button>
       </div>
 
-      <div className="w-full aspect-[4/3] bg-gray-100 border-4 border-blue-500 rounded-xl shadow-xl overflow-hidden flex justify-center items-center">
+      <div className="w-full aspect-[3/2] bg-gray-100 border-4 border-blue-500 rounded-xl shadow-xl overflow-hidden flex justify-center items-center">
         {isScanning ? (
           <video
             ref={videoRef}

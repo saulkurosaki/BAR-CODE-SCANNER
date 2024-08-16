@@ -1,6 +1,7 @@
 import Scanner from "./components/Scanner";
 import Sidebar from "./components/Sidebar";
 import logo from "./assets/scann-x-transparent-logo.svg";
+import NewProductButton from "./components/NewProductButton";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       </div>
       <Scanner />
       <Sidebar />
+      <NewProductButton />
     </main>
   );
 }
