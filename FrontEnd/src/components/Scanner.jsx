@@ -104,8 +104,11 @@ const Scanner = () => {
           scannedItems.length > 0
             ? Math.max(...scannedItems.map((item) => item.id)) + 1
             : 1;
-        const productWithId = { ...data.product, id: newId }; // Asegúrate de que data.product tenga un id
+        const productWithId = { ...data.product, id: newId };
         setScannedItems((prevItems) => [...prevItems, productWithId]);
+
+        // Detener la cámara después de recibir un producto exitosamente
+        setIsScanning(false);
       }
     } catch (error) {
       console.error("Error al enviar la imagen al backend:", error);
@@ -134,7 +137,7 @@ const Scanner = () => {
           scannedItems.length > 0
             ? Math.max(...scannedItems.map((item) => item.id)) + 1
             : 1;
-        const productWithId = { ...data.product, id: newId }; // Asignar un id
+        const productWithId = { ...data.product, id: newId };
         setScannedItems((prevItems) => [...prevItems, productWithId]);
         setManualCode(""); // Limpiar el campo de entrada
       }
@@ -189,14 +192,14 @@ const Scanner = () => {
           type="text"
           value={manualCode}
           onChange={(e) => setManualCode(e.target.value)}
-          placeholder="Ingrese el código de barras manualmente"
+          placeholder="Enter the barcode manually"
           className="px-4 py-2 border rounded"
         />
         <button
           onClick={handleManualCodeSubmit}
           className="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
         >
-          Enviar
+          Send
         </button>
       </div>
     </section>
