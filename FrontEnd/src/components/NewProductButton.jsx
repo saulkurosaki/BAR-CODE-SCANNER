@@ -7,12 +7,15 @@ import {
   DialogTrigger,
 } from "../components/ui/dialog.jsx";
 import { useState } from "react";
+import { useToast } from "./ui/use-toast.js";
 
 const NewProductButton = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [barcode, setBarcode] = useState("");
   const [price, setPrice] = useState("");
+
+  const { toast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +48,17 @@ const NewProductButton = () => {
       setDescription("");
       setBarcode("");
       setPrice("");
+      toast({
+        title: "Product Created",
+        description: "The product has been created successfully.",
+      });
     } catch (error) {
+      toast({
+        title: "Error Creating the Product",
+        description:
+          "There was a problem creating the product. Please try again.",
+        variant: "destructive",
+      });
       console.error("Error al registrar el producto:", error);
     }
   };

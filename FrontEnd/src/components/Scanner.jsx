@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useScannedItems } from "../context/ScannedItemsContext.jsx";
+import { useToast } from "./ui/use-toast.js";
 
 const Scanner = () => {
   const [isScanning, setIsScanning] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const { toast } = useToast();
 
   const [scanningText, setScanningText] = useState("Scanning");
   const [dotCount, setDotCount] = useState(0);
@@ -99,7 +102,7 @@ const Scanner = () => {
       const data = await response.json();
       console.log("Respuesta del servidor:", data);
 
-      if (data.message === "Producto encontrado.") {
+      if (data.message === "Producto encontrado") {
         const newId =
           scannedItems.length > 0
             ? Math.max(...scannedItems.map((item) => item.id)) + 1
@@ -107,8 +110,18 @@ const Scanner = () => {
         const productWithId = { ...data.product, id: newId };
         setScannedItems((prevItems) => [...prevItems, productWithId]);
 
-        // Detener la cámara después de recibir un producto exitosamente
+        toast({
+          title: `${data.product.name}`,
+          description:
+            "The product has been successfully added to your shopping card",
+        });
         setIsScanning(false);
+      } else if (data.message === "Producto no encontrado") {
+        toast({
+          title: "Product not found",
+          description: "The scanned product was not found in the database",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error("Error al enviar la imagen al backend:", error);
@@ -140,6 +153,17 @@ const Scanner = () => {
         const productWithId = { ...data.product, id: newId };
         setScannedItems((prevItems) => [...prevItems, productWithId]);
         setManualCode(""); // Limpiar el campo de entrada
+        toast({
+          title: `${data.product.name}`,
+          description:
+            "The product has been successfully added to your shopping card",
+        });
+      } else if (data.message === "Producto no encontrado") {
+        toast({
+          title: "Product not found",
+          description: "The scanned product was not found in the database",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error("Error al enviar el código manual al backend:", error);
