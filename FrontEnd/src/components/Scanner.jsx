@@ -8,7 +8,7 @@ const Scanner = () => {
 
   const [scanningText, setScanningText] = useState("Scanning");
   const [dotCount, setDotCount] = useState(0);
-  const { setScannedItems } = useScannedItems();
+  const { setScannedItems, scannedItems } = useScannedItems();
   const [manualCode, setManualCode] = useState(""); // Estado para el código manual
 
   useEffect(() => {
@@ -100,7 +100,12 @@ const Scanner = () => {
       console.log("Respuesta del servidor:", data);
 
       if (data.message === "Producto encontrado.") {
-        setScannedItems((prevItems) => [...prevItems, data.product]);
+        const newId =
+          scannedItems.length > 0
+            ? Math.max(...scannedItems.map((item) => item.id)) + 1
+            : 1;
+        const productWithId = { ...data.product, id: newId }; // Asegúrate de que data.product tenga un id
+        setScannedItems((prevItems) => [...prevItems, productWithId]);
       }
     } catch (error) {
       console.error("Error al enviar la imagen al backend:", error);
@@ -125,7 +130,12 @@ const Scanner = () => {
       console.log("Respuesta del servidor:", data);
 
       if (data.message === "Producto encontrado") {
-        setScannedItems((prevItems) => [...prevItems, data.product]);
+        const newId =
+          scannedItems.length > 0
+            ? Math.max(...scannedItems.map((item) => item.id)) + 1
+            : 1;
+        const productWithId = { ...data.product, id: newId }; // Asignar un id
+        setScannedItems((prevItems) => [...prevItems, productWithId]);
         setManualCode(""); // Limpiar el campo de entrada
       }
     } catch (error) {
