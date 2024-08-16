@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BAR CODE SCANNER PROJECT/Backend/venv"
+set -gx VIRTUAL_ENV "/Users/juan/Documents/PersonalDevs/BarCodeScan/BAR-CODE-SCANNER/Backend/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

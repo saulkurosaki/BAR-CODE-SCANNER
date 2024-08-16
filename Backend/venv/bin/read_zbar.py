@@ -1,4 +1,4 @@
-#!/Users/saulkurosaki/Library/CloudStorage/OneDrive-Personal/WORKSPACE/PROYECTOS/BAR CODE SCANNER PROJECT/Backend/venv/bin/python3.12
+#!/Users/juan/Documents/PersonalDevs/BarCodeScan/BAR-CODE-SCANNER/Backend/venv/bin/python3.12
 from __future__ import print_function
 
 import argparse

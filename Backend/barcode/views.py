@@ -73,3 +73,19 @@ class digitCode(APIView):
             }, status=status.HTTP_200_OK)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#Endpoint para registrar un producto ingresando los datos manualmente 
+
+class registerProduct(APIView):
+    def post(self, request):
+        serializer = productSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+            return Response({'message' : 'Producto agregado exitosamente',
+                             'product' : serializer.data },
+                             status = status.HTTP_200_OK)
+    
+        return Response(serializer.errors, status= status.HTTP_400_BAD_REQUEST)
