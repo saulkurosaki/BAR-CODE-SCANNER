@@ -6,20 +6,21 @@ const Scanner = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const [scanningText, setScanningText] = useState("Scanning"); // Estado para el texto de escaneo
-  const [dotCount, setDotCount] = useState(0); // Contador de puntos
-  const { setScannedItems } = useScannedItems(); // Obtén la función para actualizar el estado
+  const [scanningText, setScanningText] = useState("Scanning");
+  const [dotCount, setDotCount] = useState(0);
+  const { setScannedItems } = useScannedItems();
+  const [manualCode, setManualCode] = useState(""); // Estado para el código manual
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDotCount((prev) => (prev + 1) % 4); // Cambia el contador de puntos
-    }, 300); // Cada medio segundo
+      setDotCount((prev) => (prev + 1) % 4);
+    }, 300);
 
-    return () => clearInterval(interval); // Limpiar el intervalo al desmontar
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    setScanningText("Scanning" + ".".repeat(dotCount)); // Actualiza el texto de escaneo
+    setScanningText("Scanning" + ".".repeat(dotCount));
   }, [dotCount]);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const Scanner = () => {
     }
 
     return () => {
-      stopCamera(); // Limpiar al desmontar
+      stopCamera();
     };
   }, [isScanning]);
 
@@ -60,7 +61,7 @@ const Scanner = () => {
     const capture = () => {
       captureImage();
       if (isScanning) {
-        setTimeout(capture, 3000); // Captura una imagen cada 3 segundos
+        setTimeout(capture, 3000);
       }
     };
     capture();
@@ -76,7 +77,6 @@ const Scanner = () => {
         .getContext("2d")
         .drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // Enviar la imagen al backend
       const imageDataUrl = canvas.toDataURL("image/jpeg");
       sendImageToBackend(imageDataUrl);
     }
@@ -99,12 +99,37 @@ const Scanner = () => {
       const data = await response.json();
       console.log("Respuesta del servidor:", data);
 
-      // Agregar el producto al estado si el mensaje es "Producto encontrado."
       if (data.message === "Producto encontrado.") {
         setScannedItems((prevItems) => [...prevItems, data.product]);
       }
     } catch (error) {
       console.error("Error al enviar la imagen al backend:", error);
+    }
+  };
+
+  const handleManualCodeSubmit = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/digitCode/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ codigobase64: manualCode }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error en la respuesta del servidor");
+      }
+
+      const data = await response.json();
+      console.log("Respuesta del servidor:", data);
+
+      if (data.message === "Producto encontrado") {
+        setScannedItems((prevItems) => [...prevItems, data.product]);
+        setManualCode(""); // Limpiar el campo de entrada
+      }
+    } catch (error) {
+      console.error("Error al enviar el código manual al backend:", error);
     }
   };
 
@@ -147,6 +172,23 @@ const Scanner = () => {
       </div>
 
       <canvas ref={canvasRef} style={{ display: "none" }} />
+
+      {/* Campo de texto para ingresar el código manual */}
+      <div className="mt-4">
+        <input
+          type="text"
+          value={manualCode}
+          onChange={(e) => setManualCode(e.target.value)}
+          placeholder="Ingrese el código de barras manualmente"
+          className="px-4 py-2 border rounded"
+        />
+        <button
+          onClick={handleManualCodeSubmit}
+          className="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+        >
+          Enviar
+        </button>
+      </div>
     </section>
   );
 };
